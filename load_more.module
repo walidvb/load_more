@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file load_more.module
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function load_more_menu() {
+  $items['example'] = array(
+    'title' => 'Example Page',
+    'page callback' => 'example_page',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+  $items['example/feed'] = array(
+    'title' => 'Example RSS feed',
+    'page callback' => 'example_feed',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_init().
+ */
+function load_more_init() {
+  // Since this file should only be loaded on the front page, it cannot be
+  // declared in the info file.
+  if (drupal_is_front_page()) {
+    drupal_add_css(drupal_get_path('module', 'foo') . '/foo.css');
+  }
+}
